@@ -1,0 +1,1 @@
+export { HeroWithDots } from './HeroWithDots'
