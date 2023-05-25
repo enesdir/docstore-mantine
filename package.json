@@ -9,7 +9,7 @@
 		"dev": "next dev",
 		"format": "prettier -w .",
 		"lint": "next lint --fix --cache && npm run format",
-		"lint-staged": "lint-staged -c .lintstagedrc.cjs",
+		"lint-staged": "lint-staged",
 		"prepare": "husky install",
 		"start": "next start",
 		"typecheck": "tsc --noEmit --incremental false"
