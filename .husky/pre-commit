@@ -3,4 +3,4 @@
 
 echo 'running pre-commiting checks...'
 
-npx lint-staged
+npm run lint-staged --shell

@@ -3,4 +3,4 @@
 
 echo 'running commit-msg checks...'
 
-npx --no -- commitlint --edit "${1}"
+npx --no-install commitlint --config .commitlint.config.cjs --edit "${1}"

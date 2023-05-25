@@ -5,8 +5,6 @@ This project is built with [Next.js](https://nextjs.org/) and uses [Supabase](ht
 To see the use and details of this project::
 [Project Docs](./docs/README.md)
 
-## Admin Dashboard
-
 ## Stacks
 
 to see in detail the technologies used in this project: [Next.js + Typescript](https://nextjs.org/)
