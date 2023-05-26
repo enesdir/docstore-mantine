@@ -1,3 +1,9 @@
+import configureBundleAnalyzer from '@next/bundle-analyzer'
+
+const withBundleAnalyzer = configureBundleAnalyzer({
+	enabled: process.env.ANALYZE === 'true',
+})
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	eslint: {
@@ -63,4 +69,9 @@ const nextConfig = {
 	},
 }
 
-export default nextConfig
+const configExport = () => {
+	const plugins = [withBundleAnalyzer]
+	return plugins.reduce((acc, next) => next(acc), nextConfig)
+}
+
+export default configExport

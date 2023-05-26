@@ -4,6 +4,7 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
+		"analyze": "ANALYZE=true yarn build",
 		"build": "next build",
 		"commit": "commit",
 		"dev": "next dev",
@@ -36,6 +37,7 @@
 		"@commitlint/cli": "^17.6.3",
 		"@commitlint/config-conventional": "^17.6.3",
 		"@commitlint/prompt-cli": "^17.6.3",
+		"@next/bundle-analyzer": "13.4.4",
 		"@trivago/prettier-plugin-sort-imports": "^4.1.1",
 		"@types/eslint": "^8.40.0",
 		"@types/node": "^18.16.14",
