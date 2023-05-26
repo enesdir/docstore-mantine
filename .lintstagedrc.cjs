@@ -7,9 +7,8 @@
 const runPrettier = 'prettier --cache --cache-strategy metadata --write'
 const runEslint = 'eslint --cache --fix --max-warnings=-1'
 
-const config = {
+/** @type {import('lint-staged').Config} */
+module.exports = {
 	'*.{cjs,mjs,js,jsx,ts,tsx}': [runEslint, runPrettier],
 	'*.{json,html,css,scss,yaml,yml,md}': [runPrettier],
 }
-
-module.exports = config

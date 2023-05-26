@@ -13,5 +13,10 @@ module.exports = {
 		'subject-empty': [2, 'never'],
 		'body-empty': [2, 'always'],
 		'footer-empty': [2, 'always'],
+		'type-enum': [
+			2,
+			'always',
+			['feat', 'fix', 'docs', 'chore', 'style', 'refactor', 'ci', 'test', 'perf', 'revert', 'vercel'],
+		],
 	},
 }
