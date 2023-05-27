@@ -1,4 +1,4 @@
-import { type FC, useState } from 'react'
+import { useState, type FC } from 'react'
 import { useRouter } from 'next/navigation'
 import { Anchor, Avatar, Group, Menu, Text, UnstyledButton, createStyles, rem } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
@@ -56,7 +56,7 @@ export const UserMenu: FC = () => {
 				console.log(error)
 			})
 	}
-	console.log(session?.user)
+
 	return (
 		<Menu
 			width={260}
@@ -73,7 +73,7 @@ export const UserMenu: FC = () => {
 							src={session?.user.user_metadata.image ?? session?.user.user_metadata.image}
 							alt={fullName}
 							radius='xl'
-							size={20}
+							size={32}
 						/>
 						<Text weight={500} size='sm' sx={{ lineHeight: 1, color: theme.white }} mr={3} tt='capitalize'>
 							{fullName}

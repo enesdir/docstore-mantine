@@ -1,12 +1,9 @@
-import type { TablerIconsProps } from '@tabler/icons-react'
+import type { LinkIconType } from './LinkIcon'
 
 export type NavItemDetail = {
-	links: {
-		icon: (props: TablerIconsProps) => JSX.Element
-		title: string
+	links: (LinkIconType & {
 		description: string
-		link: string
-	}[]
+	})[]
 	footerTitle: string
 	footerDescription: string
 	footerButtonText: string

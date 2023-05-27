@@ -1,20 +1,21 @@
+import type { FC } from 'react'
 import { Group } from '@mantine/core'
 import { LogoRounded } from './LogoRounded'
 import { LogoText } from './LogoText'
 
 export interface LogoProps {
-	type?: 'mark' | 'full'
+	logoText?: string
 }
 
-export function Logo({ type }: LogoProps) {
-	if (type === 'mark') {
+export const Logo: FC<LogoProps> = ({ logoText }) => {
+	if (!logoText) {
 		return <LogoRounded />
 	}
 
 	return (
 		<Group>
 			<LogoRounded />
-			<LogoText />
+			<LogoText text={logoText} />
 		</Group>
 	)
 }

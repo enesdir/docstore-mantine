@@ -1,11 +1,11 @@
 import type { PropsWithChildren } from 'react'
-import { AppLayout } from '@/features/App'
+import { AdminLayout } from '../../features/Admin/components/AdminLayout'
 
 export const dynamic = 'force-dynamic'
 export default function AppLayoutContainer({ children }: PropsWithChildren) {
 	return (
 		<>
-			<AppLayout>{children}</AppLayout>
+			<AdminLayout>{children}</AdminLayout>
 		</>
 	)
 }

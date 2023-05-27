@@ -34,7 +34,7 @@ export function LandingHeader() {
 				<Container>
 					<div className={classes.inner}>
 						<Group position='apart' spacing={0} h='100%'>
-							<Logo type='full' />
+							<Logo logoText='DocStore' />
 
 							<DesktopMenu data={headerLinks} close={close} />
 							<Burger opened={opened} onClick={toggle} className={classes.hiddenDesktop} size='sm' />

@@ -1,13 +1,13 @@
-import { ActionIcon, Container, Group, Text, createStyles, rem } from '@mantine/core'
-import { IconBrandInstagram, IconBrandTwitter, IconBrandYoutube } from '@tabler/icons-react'
+import { Container, Text, createStyles, rem } from '@mantine/core'
 import { Logo } from '@/components/Logo/Logo'
 import { footerLinks } from '@/features/Landing/constants/footerLinks'
+import { FooterBottom } from './FooterBottom'
 
 const useStyles = createStyles((theme) => ({
 	footer: {
 		marginTop: rem(120),
 		paddingTop: `calc(${theme.spacing.xl} * 2)`,
-		paddingBottom: `calc(${theme.spacing.xl} * 2)`,
+		paddingBottom: `calc(${theme.spacing.xs} * 2)`,
 		// backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
 		borderTop: `${rem(1)} solid ${
 			theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]
@@ -19,25 +19,6 @@ const useStyles = createStyles((theme) => ({
 
 		[theme.fn.smallerThan('sm')]: {
 			display: 'flex',
-			flexDirection: 'column',
-			alignItems: 'center',
-		},
-	},
-
-	description: {
-		marginTop: rem(5),
-
-		[theme.fn.smallerThan('sm')]: {
-			marginTop: theme.spacing.xs,
-			textAlign: 'center',
-		},
-	},
-
-	inner: {
-		display: 'flex',
-		justifyContent: 'space-between',
-
-		[theme.fn.smallerThan('sm')]: {
 			flexDirection: 'column',
 			alignItems: 'center',
 		},
@@ -55,48 +36,6 @@ const useStyles = createStyles((theme) => ({
 	wrapper: {
 		width: rem(160),
 	},
-
-	link: {
-		display: 'block',
-		color: theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[6],
-		fontSize: theme.fontSizes.sm,
-		paddingTop: rem(3),
-		paddingBottom: rem(3),
-
-		'&:hover': {
-			textDecoration: 'underline',
-		},
-	},
-
-	title: {
-		fontSize: theme.fontSizes.lg,
-		fontWeight: 700,
-		// fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-		marginBottom: `calc(${theme.spacing.xs} / 2)`,
-		color: theme.colorScheme === 'dark' ? theme.white : theme.black,
-	},
-
-	afterFooter: {
-		display: 'flex',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-		marginTop: theme.spacing.xl,
-		paddingTop: theme.spacing.xl,
-		paddingBottom: theme.spacing.xl,
-		borderTop: `${rem(1)} solid ${
-			theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2]
-		}`,
-
-		[theme.fn.smallerThan('sm')]: {
-			flexDirection: 'column',
-		},
-	},
-
-	social: {
-		[theme.fn.smallerThan('sm')]: {
-			marginTop: theme.spacing.xs,
-		},
-	},
 }))
 
 export const LandingFooter = () => {
@@ -106,7 +45,17 @@ export const LandingFooter = () => {
 		const links = group.links.map((link, index) => (
 			<Text<'a'>
 				key={index}
-				className={classes.link}
+				sx={(theme) => ({
+					display: 'block',
+					color: theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[6],
+					fontSize: theme.fontSizes.sm,
+					paddingTop: rem(3),
+					paddingBottom: rem(3),
+
+					'&:hover': {
+						textDecoration: 'underline',
+					},
+				})}
 				component='a'
 				href={link.link}
 				onClick={(event) => event.preventDefault()}
@@ -117,7 +66,17 @@ export const LandingFooter = () => {
 
 		return (
 			<div className={classes.wrapper} key={group.title}>
-				<Text className={classes.title}>{group.title}</Text>
+				<Text
+					sx={(theme) => ({
+						fontSize: theme.fontSizes.lg,
+						fontWeight: 700,
+						// fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+						marginBottom: `calc(${theme.spacing.xs} / 2)`,
+						color: theme.colorScheme === 'dark' ? theme.white : theme.black,
+					})}
+				>
+					{group.title}
+				</Text>
 				{links}
 			</div>
 		)
@@ -125,32 +84,36 @@ export const LandingFooter = () => {
 
 	return (
 		<footer className={classes.footer}>
-			<Container className={classes.inner}>
+			<Container
+				sx={(theme) => ({
+					display: 'flex',
+					justifyContent: 'space-between',
+
+					[theme.fn.smallerThan('sm')]: {
+						flexDirection: 'column',
+						alignItems: 'center',
+					},
+				})}
+			>
 				<div className={classes.logo}>
-					<Logo type='full' />
-					<Text size='xs' color='dimmed' className={classes.description}>
+					<Logo logoText='DocStore' />
+					<Text
+						size='xs'
+						color='dimmed'
+						sx={(theme) => ({
+							marginTop: rem(10),
+							[theme.fn.smallerThan('sm')]: {
+								marginTop: theme.spacing.xs,
+								textAlign: 'center',
+							},
+						})}
+					>
 						Build fully functional accessible web applications faster than ever
 					</Text>
 				</div>
 				<div className={classes.groups}>{groups}</div>
 			</Container>
-			<Container className={classes.afterFooter}>
-				<Text color='dimmed' size='sm'>
-					© 2020 mantine.dev. All rights reserved.
-				</Text>
-
-				<Group spacing={0} className={classes.social} position='right' noWrap>
-					<ActionIcon size='lg'>
-						<IconBrandTwitter size='1.05rem' stroke={1.5} />
-					</ActionIcon>
-					<ActionIcon size='lg'>
-						<IconBrandYoutube size='1.05rem' stroke={1.5} />
-					</ActionIcon>
-					<ActionIcon size='lg'>
-						<IconBrandInstagram size='1.05rem' stroke={1.5} />
-					</ActionIcon>
-				</Group>
-			</Container>
+			<FooterBottom />
 		</footer>
 	)
 }
