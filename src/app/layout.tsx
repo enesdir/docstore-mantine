@@ -7,6 +7,7 @@ import EmotionProvider from '@/providers/emotion'
 import type { Database } from '@/types/dbTypes'
 import { createServerClient } from '@/utils/supabaseServer'
 
+export const dynamic = 'force-dynamic'
 export type TypedSupabaseClient = SupabaseClient<Database>
 
 const title = 'Document Management for Modern Validation Teams'

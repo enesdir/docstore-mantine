@@ -1,8 +1,8 @@
 'use client'
 
 import { Group, Stack } from '@mantine/core'
-import { PageContainer } from '~/src/components/PageContainer'
-import { PageContent } from '~/src/components/PageContent'
+import { PageContainer } from '@/components/PageContainer'
+import { PageContent } from '@/components/PageContent'
 
 export const SettingsRoot = () => (
 	<PageContainer

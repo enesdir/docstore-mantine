@@ -1,5 +1,11 @@
 import configureBundleAnalyzer from '@next/bundle-analyzer'
 
+/**
+ * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful for
+ * Docker builds.
+ */
+!process.env.SKIP_ENV_VALIDATION && (await import('./src/env.mjs'))
+
 const withBundleAnalyzer = configureBundleAnalyzer({
 	enabled: process.env.ANALYZE === 'true',
 })
@@ -34,6 +40,24 @@ const nextConfig = {
 	},
 	async headers() {
 		return [
+			{
+				source: '/favicon/:all*',
+				headers: [
+					{
+						key: 'Cache-Control',
+						value: 'public, immutable, max-age=31536000',
+					},
+				],
+			},
+			{
+				source: '/images/:all*',
+				headers: [
+					{
+						key: 'Cache-Control',
+						value: 'public, immutable, max-age=31536000',
+					},
+				],
+			},
 			{
 				source: '/login',
 				headers: [

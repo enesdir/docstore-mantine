@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import { AppHome } from '@/features/AppHome'
 
 export const metadata: Metadata = {
-	title: 'App',
+	title: 'Admin ',
 }
-export default function AppHomePage() {
+export default function AdminHomePage() {
 	return <AppHome />
 }
