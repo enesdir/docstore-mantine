@@ -1,15 +1,7 @@
 import { type FC } from 'react'
-import Link from 'next/link'
-import { Group, MediaQuery, Navbar, Tooltip, UnstyledButton, createStyles, getStylesRef } from '@mantine/core'
+import { Group, MediaQuery, Navbar, UnstyledButton, createStyles, getStylesRef } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import {
-	IconArrowLeft,
-	IconArrowRight,
-	IconDeviceAnalytics,
-	IconHome,
-	IconSettings,
-} from '@tabler/icons-react'
-import { ActiveLink } from '@/components/'
+import { IconArrowLeft, IconArrowRight, IconHome, IconSettings } from '@tabler/icons-react'
 import { getPath } from '@/utils/getPath'
 
 const useStyles = createStyles<string, { collapsed?: boolean }>((theme, params) => {
@@ -70,8 +62,8 @@ const useStyles = createStyles<string, { collapsed?: boolean }>((theme, params) 
 })
 
 const ITEMS = [
-	{ href: getPath('APP'), label: 'Home', Icon: IconHome },
-	{ href: getPath('APP_SETTINGS'), label: 'Settings', Icon: IconSettings },
+	{ link: getPath('APP'), label: 'Home', icon: IconHome },
+	{ link: getPath('APP_SETTINGS'), label: 'Settings', icon: IconSettings },
 ]
 
 export const SideNav: FC<{ className?: string }> = ({ className }) => {
@@ -82,36 +74,29 @@ export const SideNav: FC<{ className?: string }> = ({ className }) => {
 		<Navbar p='md' className={cx(classes.navbar, className)}>
 			<Navbar.Section grow>
 				<Group className={classes.header} position='apart'>
-					<Link href={getPath('APP')} legacyBehavior>
-						<a className={classes.logo}>
-							<IconDeviceAnalytics />
-							<span className={classes.linkLabel}>Admin Dashboard</span>
-						</a>
-					</Link>
-				</Group>
-				{ITEMS.map(({ label, href, Icon }) => (
-					<Tooltip
-						key={label}
-						label={label}
-						disabled={!collapsed}
-						position='right'
-						withArrow
-						sx={{ width: '100%' }}
+					{/* <Button
+						component={Link}
+						href={getPath('APP')}
+						// onClick={open}
+						variant='ghost'
+						leftIcon={<IconDeviceAnalytics size='1.25rem' />}
+						sx={(theme) => ({
+							[theme.fn.smallerThan('xs')]: { display: 'none' },
+						})}
 					>
-						<ActiveLink href={href} passHref>
-							{(isActive) => (
-								<a
-									className={cx(classes.link, {
-										[classes.linkActive]: isActive,
-									})}
-								>
-									<Icon className={classes.linkIcon} />
-									<span className={classes.linkLabel}>{label}</span>
-								</a>
-							)}
-						</ActiveLink>
-					</Tooltip>
-				))}
+						Admin Dashboard
+					</Button> */}
+				</Group>
+				{/* <Button
+					// onClick={open}
+					leftIcon={<IconPlus size='1.25rem' />}
+					sx={(theme) => ({
+						[theme.fn.smallerThan('xs')]: { display: 'none' },
+					})}
+				>
+					f
+				</Button>
+				<SideNavItem data={ITEMS} close={collapsed} /> */}
 			</Navbar.Section>
 
 			<MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
