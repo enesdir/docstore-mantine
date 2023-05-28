@@ -1,8 +1,16 @@
 import { type FC } from 'react'
-import { Group, MediaQuery, Navbar, UnstyledButton, createStyles, getStylesRef } from '@mantine/core'
+import Link from 'next/link'
+import { Button, MediaQuery, Navbar, UnstyledButton, createStyles, getStylesRef, rem } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { IconArrowLeft, IconArrowRight, IconHome, IconSettings } from '@tabler/icons-react'
+import {
+	IconArrowLeft,
+	IconArrowRight,
+	IconDeviceAnalytics,
+	IconHome,
+	IconSettings,
+} from '@tabler/icons-react'
 import { getPath } from '@/utils/getPath'
+import { SideNavItem } from './SideNavItem'
 
 const useStyles = createStyles<string, { collapsed?: boolean }>((theme, params) => {
 	const icon: string = getStylesRef('icon')
@@ -10,34 +18,22 @@ const useStyles = createStyles<string, { collapsed?: boolean }>((theme, params) 
 	return {
 		navbar: {
 			position: 'sticky',
-			top: 0,
+			paddingBottom: 0,
 			width: params?.collapsed ? 81 : 264,
 			transition: params?.collapsed ? 'width 0.1s linear' : 'none',
 		},
 
 		header: {
-			paddingBottom: theme.spacing.xs,
-			marginBottom: theme.spacing.md,
-			borderBottom: `1px solid`,
+			top: 0,
+			borderBottom: `${rem(1)} solid`,
+			marginLeft: `calc(${theme.spacing.md} * -1)`,
+			marginRight: `calc(${theme.spacing.md} * -1)`,
 		},
 
 		footer: {
 			paddingTop: theme.spacing.xs,
 			marginTop: theme.spacing.md,
-			borderTop: `1px solid`,
-		},
-
-		logo: {
-			...theme.fn.focusStyles(),
-			width: '100%',
-			display: 'flex',
-			alignItems: 'center',
-			columnGap: theme.spacing.sm,
-			textDecoration: 'none',
-			fontSize: theme.fontSizes.sm,
-			padding: `${theme.spacing.xs}px ${theme.spacing.sm}px`,
-			borderRadius: theme.radius.sm,
-			fontWeight: 700,
+			borderTop: `${rem(1)} solid`,
 		},
 
 		link: {
@@ -71,36 +67,29 @@ export const SideNav: FC<{ className?: string }> = ({ className }) => {
 	const { classes, cx } = useStyles({ collapsed })
 
 	return (
-		<Navbar p='md' className={cx(classes.navbar, className)}>
-			<Navbar.Section grow>
-				<Group className={classes.header} position='apart'>
-					{/* <Button
-						component={Link}
-						href={getPath('APP')}
-						// onClick={open}
-						variant='ghost'
-						leftIcon={<IconDeviceAnalytics size='1.25rem' />}
-						sx={(theme) => ({
-							[theme.fn.smallerThan('xs')]: { display: 'none' },
-						})}
-					>
-						Admin Dashboard
-					</Button> */}
-				</Group>
-				{/* <Button
+		<Navbar className={cx(classes.navbar, className)}>
+			<Navbar.Section className={classes.header} h={50} pb='md'>
+				<Button
+					component={Link}
+					href={getPath('APP')}
 					// onClick={open}
-					leftIcon={<IconPlus size='1.25rem' />}
-					sx={(theme) => ({
-						[theme.fn.smallerThan('xs')]: { display: 'none' },
-					})}
+					variant='ghost'
+					leftIcon={<IconDeviceAnalytics size={rem(22)} />}
+					// sx={(theme) => ({
+					// 	[theme.fn.smallerThan('xs')]: { display: 'none' },
+					// })}
+					fw={600}
+					pl={rem(46)}
+					pt={rem(10)}
 				>
-					f
+					{!collapsed && 'Admin Dashboard'}
 				</Button>
-				<SideNavItem data={ITEMS} close={collapsed} /> */}
 			</Navbar.Section>
-
+			<Navbar.Section grow px='sm' pt={rem(10)}>
+				<SideNavItem data={ITEMS} collapsed={collapsed} />
+			</Navbar.Section>
 			<MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
-				<Navbar.Section className={classes.footer}>
+				<Navbar.Section className={classes.footer} p='md'>
 					<UnstyledButton className={classes.link} onClick={handlers.toggle}>
 						{collapsed ? (
 							<IconArrowRight className={classes.linkIcon} />
