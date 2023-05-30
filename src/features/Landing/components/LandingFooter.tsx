@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Container, Text, createStyles, rem } from '@mantine/core'
 import { Logo } from '@/components/Logo/Logo'
 import { footerLinks } from '@/features/Landing/constants/footerLinks'
@@ -43,7 +44,7 @@ export const LandingFooter = () => {
 
 	const groups = footerLinks?.map((group) => {
 		const links = group.links.map((link, index) => (
-			<Text<'a'>
+			<Text
 				key={index}
 				sx={(theme) => ({
 					display: 'block',
@@ -56,7 +57,7 @@ export const LandingFooter = () => {
 						textDecoration: 'underline',
 					},
 				})}
-				component='a'
+				component={Link}
 				href={link.link}
 				onClick={(event) => event.preventDefault()}
 			>
