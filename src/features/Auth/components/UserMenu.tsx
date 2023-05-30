@@ -20,7 +20,7 @@ const useStyles = createStyles((theme) => ({
 			),
 		},
 
-		[theme.fn.smallerThan('xs')]: {
+		[theme.fn.smallerThan('md')]: {
 			display: 'none',
 		},
 	},

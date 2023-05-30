@@ -4,19 +4,19 @@ import { type ReactNode } from 'react'
 import { useActiveLinkState } from '@/hooks/useActiveLinkState'
 import { createCtx } from '@/utils/createCtx'
 
-// the types for use with the consumer of the context
-export type LandingUIContextType = {
+// The types for use with the consumer of the context
+type AppUIContextType = {
 	activeLink: string
 	setActiveLink: (value: string) => void
 }
 
-const [useCtx, Provider] = createCtx<LandingUIContextType>()
+const [useCtx, Provider] = createCtx<AppUIContextType>()
 
-type LandingUIProviderProps = {
+type AppUIProviderProps = {
 	children: ReactNode
 }
 
-function LandingUIProvider({ children }: LandingUIProviderProps) {
+function AppUIProvider({ children }: AppUIProviderProps) {
 	const { activeLink, setActiveLink } = useActiveLinkState()
 
 	const contextValue = { activeLink, setActiveLink }
@@ -24,4 +24,4 @@ function LandingUIProvider({ children }: LandingUIProviderProps) {
 	return <Provider value={contextValue}>{children}</Provider>
 }
 
-export { LandingUIProvider, useCtx as useLandingUI }
+export { AppUIProvider, useCtx as useAppUI }

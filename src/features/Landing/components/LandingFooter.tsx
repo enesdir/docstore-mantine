@@ -5,9 +5,9 @@ import { FooterBottom } from './FooterBottom'
 
 const useStyles = createStyles((theme) => ({
 	footer: {
-		marginTop: rem(120),
-		paddingTop: `calc(${theme.spacing.xl} * 2)`,
-		paddingBottom: `calc(${theme.spacing.xs} * 2)`,
+		marginTop: rem(80),
+		paddingTop: `calc(${theme.spacing.xl} * 1)`,
+		paddingBottom: `calc(${theme.spacing.xs} * 1)`,
 		// backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
 		borderTop: `${rem(1)} solid ${
 			theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]

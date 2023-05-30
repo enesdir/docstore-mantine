@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export const useLandingUIState = () => {
+export const useActiveLinkState = () => {
 	const [activeLink, setActiveLink] = useState<string>('')
 	return {
 		activeLink,

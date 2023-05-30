@@ -6,6 +6,7 @@ import { ActionIcon, AppShell, Box, MediaQuery } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconMenu2 } from '@tabler/icons-react'
 import { LayoutErrorBoundary } from '@/components/'
+import { AppUIProvider } from '@/features/App/providers/AppUIProvider'
 import { DrawerNav } from './DrawerNav'
 
 const DynamicHeader = dynamic(async () => {
@@ -22,35 +23,37 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
 	const [opened, handlers] = useDisclosure(false)
 
 	return (
-		<AppShell
-			padding='md'
-			styles={() => ({
-				body: { minHeight: '100vh' },
-				main: { padding: 0 },
-			})}
-			navbar={
-				<>
-					<MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
-						<DynamicSideNav />
-					</MediaQuery>
-					<MediaQuery largerThan='sm' styles={{ display: 'none' }}>
-						<DrawerNav opened={opened} handleClose={handlers.close} />
-					</MediaQuery>
-				</>
-			}
-		>
-			<DynamicHeader
-				left={
-					<MediaQuery largerThan='sm' styles={{ display: 'none' }}>
-						<ActionIcon variant='hover' radius='xl' size={40} onClick={handlers.open}>
-							<IconMenu2 />
-						</ActionIcon>
-					</MediaQuery>
+		<AppUIProvider>
+			<AppShell
+				padding='md'
+				styles={() => ({
+					body: { minHeight: '100vh' },
+					main: { padding: 0 },
+				})}
+				navbar={
+					<>
+						<MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
+							<DynamicSideNav />
+						</MediaQuery>
+						<MediaQuery largerThan='sm' styles={{ display: 'none' }}>
+							<DrawerNav opened={opened} handleClose={handlers.close} />
+						</MediaQuery>
+					</>
 				}
-			/>
-			<Box py='xl' px='md'>
-				<LayoutErrorBoundary>{children}</LayoutErrorBoundary>
-			</Box>
-		</AppShell>
+			>
+				<DynamicHeader
+					left={
+						<MediaQuery largerThan='sm' styles={{ display: 'none' }}>
+							<ActionIcon variant='hover' radius='xl' size={40} onClick={handlers.open}>
+								<IconMenu2 />
+							</ActionIcon>
+						</MediaQuery>
+					}
+				/>
+				<Box py='xl' px='md'>
+					<LayoutErrorBoundary>{children}</LayoutErrorBoundary>
+				</Box>
+			</AppShell>
+		</AppUIProvider>
 	)
 }
