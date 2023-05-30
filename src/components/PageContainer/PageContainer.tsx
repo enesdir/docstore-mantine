@@ -1,6 +1,6 @@
 import { type FC, type ReactNode } from 'react'
 import Link from 'next/link'
-import { Anchor, Breadcrumbs, Container, type ContainerProps, Space, Title } from '@mantine/core'
+import { Anchor, Breadcrumbs, Container, Space, Title, type ContainerProps } from '@mantine/core'
 
 type PageContainerProps = {
 	children: ReactNode
@@ -13,7 +13,7 @@ export const PageContainer: FC<PageContainerProps> = ({ children, title, items, 
 		{items && items.length > 0 ? (
 			<Breadcrumbs>
 				{items.map((item) => (
-					<Link key={item.label} href={item.href} passHref>
+					<Link key={item.label} href={item.href} passHref legacyBehavior>
 						<Anchor>{item.label}</Anchor>
 					</Link>
 				))}
