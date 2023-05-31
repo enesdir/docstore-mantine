@@ -1,10 +1,8 @@
 import { type FC } from 'react'
-import { Group, Navbar, Text, UnstyledButton, createStyles, getStylesRef, rem } from '@mantine/core'
+import { Group, Navbar, Text, UnstyledButton, createStyles, rem } from '@mantine/core'
 import { IconDeviceAnalytics } from '@tabler/icons-react'
 
 const useStyles = createStyles<string, { collapsed?: boolean }>((theme, params) => {
-	const icon: string = getStylesRef('icon')
-
 	return {
 		subLink: {
 			width: '100%',

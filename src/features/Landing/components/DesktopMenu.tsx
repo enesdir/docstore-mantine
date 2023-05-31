@@ -46,7 +46,7 @@ type DesktopMenusProps = NavItemActions & {
 	data: NavItemsType[]
 }
 export function DesktopMenu({ data, close }: DesktopMenusProps) {
-	const { classes, cx, theme } = useStyles()
+	const { classes } = useStyles()
 
 	const renderLinks = data.map((item) => {
 		if (item.detail) {

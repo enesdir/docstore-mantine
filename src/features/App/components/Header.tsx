@@ -7,10 +7,11 @@ import { SearchForm } from './SearchForm'
 export const Header: FC<{ left: ReactNode }> = ({ left }) => (
 	<Box
 		component='header'
-		sx={(theme) => ({
-			padding: `calc(${theme.spacing.sm}* -1) calc(${theme.spacing.md}*-1)`,
+		sx={{
+			paddingRight: rem(8),
+			paddingLeft: rem(1),
 			borderBottom: `${rem(1)} solid`,
-		})}
+		}}
 		h={50}
 	>
 		<Group noWrap position='apart'>

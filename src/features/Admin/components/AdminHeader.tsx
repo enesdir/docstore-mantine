@@ -43,7 +43,7 @@ export const AdminHeader = ({ opened, setOpened }) => {
 				<div>
 					<HeaderNotification />
 					<MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
-						<UserMenu />
+						<UserMenu isAdminLayout={true} />
 					</MediaQuery>
 				</div>
 			</Group>

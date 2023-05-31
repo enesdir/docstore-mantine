@@ -16,7 +16,7 @@ const useStyles = createStyles<string, { collapsed?: boolean }>((theme, params) 
 	}
 })
 
-export const SideNav: FC = ({ className }) => {
+export const SideNav: FC<{ className?: string }> = ({ className }) => {
 	const [collapsed, handlers] = useDisclosure(false)
 	const { classes, cx } = useStyles({ collapsed })
 

@@ -1,7 +1,7 @@
 import { Group, Text, ThemeIcon, UnstyledButton, createStyles, rem } from '@mantine/core'
-import { useLandingUI } from '../providers/LandingUIProvider'
-import { type NavItemActions } from '../types/NavItemActions'
-import { type NavItemDetail } from '../types/NavItemType'
+import { useLandingUI } from '@/features/Landing/providers/LandingUIProvider'
+import { type NavItemActions } from '@/features/Landing/types/NavItemActions'
+import { type NavItemDetail } from '@/features/Landing/types/NavItemType'
 
 const useStyles = createStyles((theme) => ({
 	subLink: {

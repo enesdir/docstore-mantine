@@ -1,20 +1,22 @@
-import { useState, type FC } from 'react'
+import { Fragment, useState, type FC } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Anchor, Avatar, Group, Menu, Text, UnstyledButton, createStyles, rem } from '@mantine/core'
+import { Avatar, Group, Menu, Text, UnstyledButton, createStyles, rem } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
-import { IconChevronDown, IconLogout, IconSettings } from '@tabler/icons-react'
+import { IconChevronDown, IconLogout } from '@tabler/icons-react'
 import { useSupabase } from '@/providers/SupabaseProvider'
 import { getPath } from '@/utils/getPath'
+import { userMenuLinks } from '../constants/userMenuLinks'
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles<string, { isAdminLayout?: boolean }>((theme, params) => ({
 	user: {
 		color: theme.white,
-		padding: `${theme.spacing.xs} ${theme.spacing.sm}`,
+		padding: params.isAdminLayout ? `${theme.spacing.xs} ${theme.spacing.sm}` : rem(-2),
 		borderRadius: theme.radius.sm,
 		transition: 'background-color 100ms ease',
 
 		'&:hover': {
-			backgroundColor: theme.fn.lighten(
+			backgroundColor: theme.fn.darken(
 				theme.fn.variant({ variant: 'filled', color: theme.primaryColor }).background!,
 				0.1
 			),
@@ -32,9 +34,11 @@ const useStyles = createStyles((theme) => ({
 		),
 	},
 }))
-
-export const UserMenu: FC = () => {
-	const { classes, theme, cx } = useStyles()
+type UserMenuProps = {
+	isAdminLayout?: boolean
+}
+export const UserMenu: FC<UserMenuProps> = ({ isAdminLayout }) => {
+	const { classes, theme, cx } = useStyles({ isAdminLayout })
 	const { supabase, session } = useSupabase()
 	const [userMenuOpened, setUserMenuOpened] = useState(false)
 	const router = useRouter()
@@ -56,7 +60,21 @@ export const UserMenu: FC = () => {
 				console.log(error)
 			})
 	}
-
+	const links = userMenuLinks?.map((group, groupIndex) => {
+		const items = group.links.map((item, index) => (
+			<Menu.Item icon={<item.icon size={16} />} key={index} disabled={item.isDisabled}>
+				<Text component={Link} href={item.link}>
+					{item.title}
+				</Text>
+			</Menu.Item>
+		))
+		return (
+			<Fragment key={groupIndex}>
+				<Menu.Label>{group.title}</Menu.Label>
+				{items}
+			</Fragment>
+		)
+	})
 	return (
 		<Menu
 			width={260}
@@ -67,6 +85,7 @@ export const UserMenu: FC = () => {
 			withinPortal
 		>
 			<Menu.Target>
+				{/* @ts-expect-error userActive defined */}
 				<UnstyledButton className={cx(classes.user, { [classes.userActive]: userMenuOpened })}>
 					<Group spacing={7}>
 						<Avatar
@@ -83,10 +102,7 @@ export const UserMenu: FC = () => {
 				</UnstyledButton>
 			</Menu.Target>
 			<Menu.Dropdown>
-				<Menu.Label>Application</Menu.Label>
-				<Menu.Item icon={<IconSettings size={16} />} component={Anchor} href='#'>
-					Documents
-				</Menu.Item>
+				{links}
 				<Menu.Divider />
 				<Menu.Item icon={<IconLogout size={16} />} onClick={handleLogout}>
 					Log Out
