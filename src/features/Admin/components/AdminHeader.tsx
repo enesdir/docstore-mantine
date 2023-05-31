@@ -37,7 +37,7 @@ export const AdminHeader: FC<AdminHeaderProps> = ({ opened, setOpened }) => {
 					<MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
 						<Group position='apart'>
 							<Logo logoText='DocStore' />
-							<MediaQuery smallerThan='xs' styles={{ display: 'none' }}>
+							<MediaQuery largerThan='xs' smallerThan='lg' styles={{ display: 'none' }}>
 								<Code sx={{ fontWeight: 700 }}>v3.1.2</Code>
 							</MediaQuery>
 						</Group>
