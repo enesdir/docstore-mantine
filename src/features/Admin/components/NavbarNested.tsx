@@ -1,55 +1,13 @@
+import type { FC } from 'react'
 import { Navbar, ScrollArea, createStyles, rem } from '@mantine/core'
-import {
-	IconAdjustments,
-	IconCalendarStats,
-	IconFileAnalytics,
-	IconGauge,
-	IconLock,
-	IconNotes,
-	IconPresentationAnalytics,
-} from '@tabler/icons-react'
+import { adminNavLinks } from '@/features/Admin/constants/adminNavLinks'
 import { LinksGroup } from './LinksGroup'
-
-const mockdata = [
-	{ label: 'Dashboard', icon: IconGauge },
-	{
-		label: 'Market news',
-		icon: IconNotes,
-		initiallyOpened: true,
-		links: [
-			{ label: 'Overview', link: '/' },
-			{ label: 'Forecasts', link: '/' },
-			{ label: 'Outlook', link: '/' },
-			{ label: 'Real time', link: '/' },
-		],
-	},
-	{
-		label: 'Releases',
-		icon: IconCalendarStats,
-		links: [
-			{ label: 'Upcoming releases', link: '/' },
-			{ label: 'Previous releases', link: '/' },
-			{ label: 'Releases schedule', link: '/' },
-		],
-	},
-	{ label: 'Analytics', icon: IconPresentationAnalytics },
-	{ label: 'Contracts', icon: IconFileAnalytics },
-	{ label: 'Settings', icon: IconAdjustments },
-	{
-		label: 'Security',
-		icon: IconLock,
-		links: [
-			{ label: 'Enable 2FA', link: '/' },
-			{ label: 'Change password', link: '/' },
-			{ label: 'Recovery codes', link: '/' },
-		],
-	},
-]
+import { NavbarFooter } from './NavbarFooter'
 
 const useStyles = createStyles((theme) => ({
 	navbar: {
 		backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.white,
-		paddingBottom: 0,
+		paddingBottom: 4,
 	},
 
 	header: {
@@ -71,17 +29,12 @@ const useStyles = createStyles((theme) => ({
 	linksInner: {
 		paddingBottom: theme.spacing.xl,
 	},
-
-	footer: {
-		borderTop: `${rem(1)} solid ${
-			theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
-		}`,
-	},
 }))
 
-export function NavbarNested({ hidden }) {
+type NavbarNestedProps = { hidden: boolean }
+export const NavbarNested: FC<NavbarNestedProps> = ({ hidden }) => {
 	const { classes } = useStyles()
-	const links = mockdata.map((item) => <LinksGroup {...item} key={item.label} />)
+	const links = adminNavLinks.map((item) => <LinksGroup {...item} key={item.label} />)
 
 	return (
 		<Navbar
@@ -94,10 +47,7 @@ export function NavbarNested({ hidden }) {
 			<Navbar.Section grow className={classes.links} component={ScrollArea}>
 				<div className={classes.linksInner}>{links}</div>
 			</Navbar.Section>
-
-			<Navbar.Section className={classes.footer} py='md'>
-				user
-			</Navbar.Section>
+			<NavbarFooter />
 		</Navbar>
 	)
 }

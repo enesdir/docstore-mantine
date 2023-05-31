@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation'
 import { Group, Text, ThemeIcon, UnstyledButton, createStyles, rem } from '@mantine/core'
-import { AppNavLinks } from '@/features/App/constants/AppNavLinks'
+import { appNavLinks } from '@/features/App/constants/appNavLinks'
 import { useAppUI } from '@/features/App/providers/AppUIProvider'
 import type { SideNavActions } from '@/features/App/types/SideNavActions'
 
@@ -33,7 +33,7 @@ export function SideNavItems({ collapsed, close, isMobile }: SideNavItemsProps) 
 	const { classes, theme, cx } = useStyles({ collapsed })
 	const router = useRouter()
 	const { activeLink, setActiveLink } = useAppUI()
-	const links = AppNavLinks.map((item) => (
+	const links = appNavLinks.map((item) => (
 		<UnstyledButton
 			// @ts-expect-error linkActive defined in classes
 			className={cx(classes.link, { [classes.linkActive]: activeLink === item.link })}

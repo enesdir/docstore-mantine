@@ -9,13 +9,24 @@ type PageContentProps = {
 }
 
 export const PageContent: FC<PageContentProps> = ({ children, title, outerTitle, className }) => (
-	<Box className={className}>
+	<Box
+		className={className}
+		// sx={(theme) => ({
+		// 	backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+		// })}
+	>
 		{outerTitle ? (
 			<Title order={2} mb='sm'>
 				{title}
 			</Title>
 		) : null}
-		<Paper shadow='xs' p='md'>
+		<Paper
+			shadow='xs'
+			p='md'
+			sx={(theme) => ({
+				backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+			})}
+		>
 			{outerTitle ? null : (
 				<Title order={2} mb='sm'>
 					{title}

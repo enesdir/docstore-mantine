@@ -7,4 +7,5 @@ export enum PATHS {
 	APP_NOTIFICATION = '/app/notification',
 	APP_SETTINGS = '/app/settings',
 	ADMIN = '/admin',
+	ADMIN_COLLEAGUES_SALARIES = '/admin/colleagues/salaries',
 }

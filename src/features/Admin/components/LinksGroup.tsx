@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import { Group, Box, Collapse, ThemeIcon, Text, UnstyledButton, createStyles, rem } from '@mantine/core'
+import { useState, type FC } from 'react'
+import Link from 'next/link'
+import { Box, Collapse, Group, Text, ThemeIcon, UnstyledButton, createStyles, rem } from '@mantine/core'
 import { IconCalendarStats, IconChevronLeft, IconChevronRight } from '@tabler/icons-react'
 
 const useStyles = createStyles((theme) => ({
@@ -48,18 +49,18 @@ interface LinksGroupProps {
 	links?: { label: string; link: string }[]
 }
 
-export function LinksGroup({ icon: Icon, label, initiallyOpened, links }: LinksGroupProps) {
+export const LinksGroup: FC<LinksGroupProps> = ({ icon: Icon, label, initiallyOpened, links }) => {
 	const { classes, theme } = useStyles()
 	const hasLinks = Array.isArray(links)
 	const [opened, setOpened] = useState(initiallyOpened || false)
 	const ChevronIcon = theme.dir === 'ltr' ? IconChevronRight : IconChevronLeft
 	const items = (hasLinks ? links : []).map((link) => (
-		<Text<'a'>
-			component='a'
+		<Text
+			component={Link}
 			className={classes.link}
 			href={link.link}
 			key={link.label}
-			onClick={(event) => event.preventDefault()}
+			// onClick={(event) => event.preventDefault()}
 		>
 			{link.label}
 		</Text>

@@ -2,7 +2,7 @@
 
 import type { PropsWithChildren } from 'react'
 import { CacheProvider } from '@emotion/react'
-import { type ColorScheme, MantineProvider } from '@mantine/core'
+import { ColorSchemeProvider, MantineProvider, type ColorScheme } from '@mantine/core'
 import { useHotkeys, useLocalStorage } from '@mantine/hooks'
 import { Notifications } from '@mantine/notifications'
 import { useGluedEmotionCache } from '@/lib/emotionNextjsGlue'
@@ -21,15 +21,17 @@ export default function EmotionProvider({ children }: PropsWithChildren) {
 	useHotkeys([['mod+J', () => toggleColorScheme()]])
 	return (
 		<CacheProvider value={cache}>
-			<MantineProvider
-				withGlobalStyles
-				withNormalizeCSS
-				emotionCache={cache}
-				theme={{ colorScheme: colorScheme }}
-			>
-				<Notifications />
-				{children}
-			</MantineProvider>
+			<ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={() => toggleColorScheme()}>
+				<MantineProvider
+					withGlobalStyles
+					withNormalizeCSS
+					emotionCache={cache}
+					theme={{ colorScheme: colorScheme }}
+				>
+					<Notifications />
+					{children}
+				</MantineProvider>
+			</ColorSchemeProvider>
 		</CacheProvider>
 	)
 }

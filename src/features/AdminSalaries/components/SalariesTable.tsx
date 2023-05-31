@@ -1,3 +1,4 @@
+import type { FC } from 'react'
 import { ActionIcon, Avatar, Group, Menu, ScrollArea, Table, Text } from '@mantine/core'
 import {
 	IconDots,
@@ -13,7 +14,7 @@ interface UsersStackProps {
 	data: User[]
 }
 
-export function UsersStack({ data }: UsersStackProps) {
+export const SalariesTable: FC<UsersStackProps> = ({ data }) => {
 	const rows = data.map((item) => (
 		<tr key={item.name}>
 			<td>
@@ -69,6 +70,14 @@ export function UsersStack({ data }: UsersStackProps) {
 	return (
 		<ScrollArea>
 			<Table sx={{ minWidth: 800 }} verticalSpacing='md'>
+				<thead>
+					<tr>
+						<th>Employee</th>
+						<th>Role</th>
+						<th>Rates</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
 				<tbody>{rows}</tbody>
 			</Table>
 		</ScrollArea>

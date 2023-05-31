@@ -1,10 +1,12 @@
+import type { FC } from 'react'
 import { Box, Burger, Code, Group, Header, MediaQuery, useMantineTheme } from '@mantine/core'
+import { Logo } from '@/components/Logo'
 import { HeaderNotification } from '@/features/App/components/HeaderNotification'
 import { SearchForm } from '@/features/App/components/SearchForm'
 import { UserMenu } from '@/features/Auth/components/UserMenu'
-import { Logo } from '../../../components/Logo'
 
-export const AdminHeader = ({ opened, setOpened }) => {
+type AdminHeaderProps = { opened: boolean; setOpened: () => void }
+export const AdminHeader: FC<AdminHeaderProps> = ({ opened, setOpened }) => {
 	const theme = useMantineTheme()
 
 	return (
@@ -25,17 +27,19 @@ export const AdminHeader = ({ opened, setOpened }) => {
 				<MediaQuery largerThan='sm' styles={{ display: 'none' }}>
 					<Burger
 						opened={opened}
-						onClick={() => setOpened((o) => !o)}
+						onClick={() => setOpened()}
 						size='sm'
 						color={theme.colors.gray[6]}
 						mr='xl'
 					/>
 				</MediaQuery>
-				<Box sx={{ sm: 200, width: 300 }} pr='md'>
+				<Box sx={{ sm: 200, width: 300 }} pr='xl'>
 					<MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
 						<Group position='apart'>
 							<Logo logoText='DocStore' />
-							<Code sx={{ fontWeight: 700 }}>v3.1.2</Code>
+							<MediaQuery smallerThan='xs' styles={{ display: 'none' }}>
+								<Code sx={{ fontWeight: 700 }}>v3.1.2</Code>
+							</MediaQuery>
 						</Group>
 					</MediaQuery>
 				</Box>
