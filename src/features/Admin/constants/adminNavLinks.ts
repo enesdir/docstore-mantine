@@ -12,7 +12,7 @@ import type { AdminNavLinkType } from '@/features/Admin/types/AdminNavLinkType'
 import { getPath } from '@/utils/getPath'
 
 export const adminNavLinks: AdminNavLinkType[] = [
-	{ label: 'Dashboard', icon: IconGauge },
+	{ label: 'Dashboard', icon: IconGauge, link: getPath('ADMIN') },
 	{
 		label: 'Colleagues',
 		icon: IconUsersGroup,
@@ -42,9 +42,13 @@ export const adminNavLinks: AdminNavLinkType[] = [
 			{ label: 'Releases schedule', link: '/' },
 		],
 	},
-	{ label: 'Analytics', icon: IconPresentationAnalytics },
-	{ label: 'Contracts', icon: IconFileAnalytics },
-	{ label: 'Settings', icon: IconAdjustments },
+	{
+		label: 'Analytics',
+		icon: IconPresentationAnalytics,
+		link: getPath('ADMIN'),
+	},
+	{ label: 'Contracts', icon: IconFileAnalytics, link: getPath('ADMIN') },
+	{ label: 'Settings', icon: IconAdjustments, link: getPath('ADMIN') },
 	{
 		label: 'Security',
 		icon: IconLock,

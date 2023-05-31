@@ -1,30 +1,7 @@
-import { useState } from 'react'
 import { Navbar, createStyles, getStylesRef, rem } from '@mantine/core'
 import { IconLogout, IconSwitchHorizontal } from '@tabler/icons-react'
 
 const useStyles = createStyles((theme) => ({
-	navbar: {
-		backgroundColor: theme.fn.variant({ variant: 'filled', color: theme.primaryColor }).background,
-	},
-
-	version: {
-		backgroundColor: theme.fn.lighten(
-			theme.fn.variant({ variant: 'filled', color: theme.primaryColor }).background!,
-			0.1
-		),
-		color: theme.white,
-		fontWeight: 700,
-	},
-
-	header: {
-		paddingBottom: theme.spacing.md,
-		marginBottom: `calc(${theme.spacing.md} * 1.5)`,
-		borderBottom: `${rem(1)} solid ${theme.fn.lighten(
-			theme.fn.variant({ variant: 'filled', color: theme.primaryColor }).background!,
-			0.1
-		)}`,
-	},
-
 	footer: {
 		paddingTop: theme.spacing.md,
 		marginTop: theme.spacing.md,
@@ -58,23 +35,10 @@ const useStyles = createStyles((theme) => ({
 		opacity: 0.75,
 		marginRight: theme.spacing.sm,
 	},
-
-	linkActive: {
-		'&, &:hover': {
-			backgroundColor: theme.fn.lighten(
-				theme.fn.variant({ variant: 'filled', color: theme.primaryColor }).background!,
-				0.15
-			),
-			[`& .${getStylesRef('icon')}`]: {
-				opacity: 0.9,
-			},
-		},
-	},
 }))
 
 export function NavbarFooter() {
-	const { classes, cx } = useStyles()
-	const [active, setActive] = useState('Billing')
+	const { classes } = useStyles()
 
 	return (
 		<Navbar.Section className={classes.footer}>

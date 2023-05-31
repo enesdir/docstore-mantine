@@ -47,17 +47,19 @@ interface LinksGroupProps {
 	label: string
 	initiallyOpened?: boolean
 	links?: { label: string; link: string }[]
+	link: string
 }
 
-export const LinksGroup: FC<LinksGroupProps> = ({ icon: Icon, label, initiallyOpened, links }) => {
-	const { classes, theme } = useStyles()
+export const LinksGroup: FC<LinksGroupProps> = ({ icon: Icon, label, initiallyOpened, links, link }) => {
+	const { classes, theme, cx } = useStyles()
+
 	const hasLinks = Array.isArray(links)
 	const [opened, setOpened] = useState(initiallyOpened || false)
 	const ChevronIcon = theme.dir === 'ltr' ? IconChevronRight : IconChevronLeft
 	const items = (hasLinks ? links : []).map((link) => (
 		<Text
 			component={Link}
-			className={classes.link}
+			className={cx({ [classes.link]: hasLinks })}
 			href={link.link}
 			key={link.label}
 			// onClick={(event) => event.preventDefault()}
@@ -66,9 +68,36 @@ export const LinksGroup: FC<LinksGroupProps> = ({ icon: Icon, label, initiallyOp
 		</Text>
 	))
 
+	if (hasLinks) {
+		return (
+			<>
+				<UnstyledButton onClick={() => setOpened((o) => !o)} className={classes.control}>
+					<Group position='apart' spacing={0}>
+						<Box sx={{ display: 'flex', alignItems: 'center' }}>
+							<ThemeIcon variant='light' size={30}>
+								<Icon size='1.1rem' />
+							</ThemeIcon>
+							<Box ml='md'>{label}</Box>
+						</Box>
+						{hasLinks && (
+							<ChevronIcon
+								className={classes.chevron}
+								size='1rem'
+								stroke={1.5}
+								style={{
+									transform: opened ? `rotate(${theme.dir === 'rtl' ? -90 : 90}deg)` : 'none',
+								}}
+							/>
+						)}
+					</Group>
+				</UnstyledButton>
+				{hasLinks ? <Collapse in={opened}>{items}</Collapse> : null}
+			</>
+		)
+	}
 	return (
 		<>
-			<UnstyledButton onClick={() => setOpened((o) => !o)} className={classes.control}>
+			<UnstyledButton className={classes.control} href={link} component={Link}>
 				<Group position='apart' spacing={0}>
 					<Box sx={{ display: 'flex', alignItems: 'center' }}>
 						<ThemeIcon variant='light' size={30}>
@@ -76,19 +105,8 @@ export const LinksGroup: FC<LinksGroupProps> = ({ icon: Icon, label, initiallyOp
 						</ThemeIcon>
 						<Box ml='md'>{label}</Box>
 					</Box>
-					{hasLinks && (
-						<ChevronIcon
-							className={classes.chevron}
-							size='1rem'
-							stroke={1.5}
-							style={{
-								transform: opened ? `rotate(${theme.dir === 'rtl' ? -90 : 90}deg)` : 'none',
-							}}
-						/>
-					)}
 				</Group>
 			</UnstyledButton>
-			{hasLinks ? <Collapse in={opened}>{items}</Collapse> : null}
 		</>
 	)
 }
