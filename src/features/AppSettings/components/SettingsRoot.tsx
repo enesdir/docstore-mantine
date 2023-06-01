@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Flex, Stack, TextInput } from '@mantine/core'
+import { Button, SimpleGrid, Stack, TextInput } from '@mantine/core'
 import { IconAt, IconLetterCase } from '@tabler/icons-react'
 import { PageContainer } from '@/components/PageContainer'
 import { PageContent } from '@/components/PageContent'
@@ -19,11 +19,12 @@ export const SettingsRoot = () => (
 			<PageContent outerTitle title='	User Settings'>
 				User Settings
 			</PageContent>
-			<Flex
-				miw={200}
-				direction={{ base: 'column', sm: 'row' }}
-				gap={{ base: 'sm', sm: 'lg' }}
-				justify={{ sm: 'space-between' }}
+			<SimpleGrid
+				cols={2}
+				breakpoints={[
+					{ maxWidth: 'md', cols: 2 },
+					{ maxWidth: 'xs', cols: 1 },
+				]}
 			>
 				<PageContent title='Profile Settings'>
 					<form>
@@ -52,7 +53,7 @@ export const SettingsRoot = () => (
 				<PageContent title='UI Preferences'>
 					<ColorSchemeSwitch />
 				</PageContent>
-			</Flex>
+			</SimpleGrid>
 		</Stack>
 	</PageContainer>
 )
