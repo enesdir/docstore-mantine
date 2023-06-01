@@ -1,5 +1,7 @@
 # Detailed Setup/Usage Guide
 
+[![docstore-landing](https://i.ibb.co/3M6Q7N1/captures-chrome-capture-2023-5-1.png)](https://github.com/enesdir/docstore-mantine)
+
 ## Table of Contents
 
 - [Detailed Setup/Usage Guide](#detailed-setupusage-guide)

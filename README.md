@@ -2,6 +2,12 @@
 
 This project is built with [Next.js](https://nextjs.org/) and uses [Supabase](https://supabase.io/) for authentication and database management.
 
+[![docstore-landing](https://i.ibb.co/1qRL0YP/docstore-mantine-home.gif)](https://github.com/enesdir/docstore-mantine)
+
+[![docstore-dashboard](https://i.ibb.co/Jrx68zv/docstore-mantine-dashboard1.gif)](https://github.com/enesdir/docstore-mantine)
+
+[![docstore-dashboard2](https://i.ibb.co/Jv5kR0F/docstore-mantine-dashboard2.gif)](https://github.com/enesdir/docstore-mantine)
+
 To see the use and details of this project::
 [Project Docs](./docs/README.md)
 
